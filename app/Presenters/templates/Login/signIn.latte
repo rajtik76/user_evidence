@@ -1,0 +1,29 @@
+{* This is login page *}
+
+{block title}Login{/block}
+{block content}
+
+{form loginForm}
+    <div class="row">
+        <div class="mb-3">
+            {label username class => form-label /}
+                {input username class => form-control}
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3">
+            {label password class => form-label /}
+                {input password class => form-control}
+        </div>
+    </div>
+    <div class="row">
+        <ul class="errors" n:if="$form->hasErrors()">
+            <li n:foreach="$form->errors as $error">{$error}</li>
+        </ul>
+    </div>
+    <div class="row">
+        <div class="mb-3">
+            {input submit class => 'btn btn-primary'}
+        </div>
+    </div>
+{/form}
