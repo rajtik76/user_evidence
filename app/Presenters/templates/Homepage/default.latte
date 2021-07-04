@@ -3,3 +3,40 @@
 {block title}Homepage{/block}
 
 {block content}
+
+{if $user->isInRole('admin')}
+    <a n:href="Homepage:newUser" class="btn btn-success">New user</a>
+{/if}
+
+<table class="table table-striped table-sm">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Password</th>
+        <th>Administrator</th>
+        <th>Created</th>
+        <th>Updated</th>
+        {if $user->isInRole('admin')}
+            <th>Actions</th>{/if}
+    </tr>
+    </thead>
+    <tbody>
+    <tr n:foreach="$usersData as $userRow">
+        <td>{$userRow->id}</td>
+        <td>{$userRow->user_name}</td>
+        <td>{$userRow->user_password}</td>
+        <td>{if $userRow->administrator}Yes{else}No{/if}</td>
+        <td>{$userRow->created_at|date:'%d.%m.%Y %H:%m:%S'}</td>
+        <td>{$userRow->updated_at|date:'%d.%m.%Y %H:%m:%S'}</td>
+        {if $user->isInRole('admin')}
+            <td>
+                <a n:href="Homepage:editUser $userRow->id" class="btn btn-primary btn-sm"
+                                                           role="button">Edit</a>
+                <a n:href="delete! $userRow->id" class="btn btn-danger btn-sm" role="button"
+                                                 onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        {/if}
+    </tr>
+    </tbody>
+</table>

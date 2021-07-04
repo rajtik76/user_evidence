@@ -1,0 +1,27 @@
+{extends ../@layout.latte}
+
+{block content}
+
+{form modifyUserForm}
+    <div class="row">
+        {label username class => form-label}
+        {input username class => form-control}
+    </div>
+    <div class="row">
+        {label password class => form-label}
+        {input password class => form-control}
+    </div>
+    <div class="row">
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" n:name="administrator">
+            <label class="form-check-label" n:name="administrator">
+                {$form['administrator']->caption}
+            </label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3">
+            {input submit class => 'btn btn-primary'}
+        </div>
+    </div>
+{/form}
